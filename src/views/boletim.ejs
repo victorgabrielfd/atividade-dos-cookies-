@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Boletim — Portal de Notas</title><link rel="stylesheet" href="/css/styles.css"></head>
+<body>
+<header><div class="container"><h1>📝 Portal de Notas</h1><nav><a href="/boletim" style="color:#E8621A;font-weight:bold">Boletim</a><a href="/sair" style="color:#E74C3C">Sair</a></nav><span class="user">👤 <%= aluno %></span></div></header>
+<main><div class="container">
+  <% if (flash) { %><div class="flash"><%= flash %></div><% } %>
+
+  <div class="stats">
+    <div class="stat"><div class="num"><%= notas.length %></div><div class="rot">Notas</div></div>
+    <div class="stat"><div class="num"><%= media.toFixed(1) %></div><div class="rot">Média</div></div>
+    <div class="stat">
+      <div class="num">
+        <% if (situacao === "Aprovado") { %>
+          <span class="badge badge-aprovado">✅ Aprovado</span>
+        <% } else if (situacao === "Recuperação") { %>
+          <span class="badge badge-recuperacao">⚠️ Recuperação</span>
+        <% } else { %>
+          <span class="badge badge-reprovado">❌ Reprovado</span>
+        <% } %>
+      </div>
+      <div class="rot">Situação</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📊 Suas Notas</h2>
+    <% if (notas.length === 0) { %>
+      <div class="empty">Nenhuma nota adicionada ainda.</div>
+    <% } else { %>
+      <div class="notas-grid">
+        <% notas.forEach((nota, i) => { %>
+          <div class="nota-badge" style="color: <%= nota >= 7 ? '#27AE60' : nota >= 5 ? '#F1C40F' : '#E74C3C' %>">
+            <%= nota.toFixed(1) %>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/nota" class="nota-input">
+      <input type="number" name="nota" step="0.1" min="0" max="10" placeholder="Nota (0-10)" required>
+      <button type="submit" class="btn btn-primary btn-sm">Adicionar Nota</button>
+    </form>
+  </div>
+
+  <div style="display:flex;gap:10px;margin-top:8px">
+    <form method="POST" action="/limpar"><button type="submit" class="btn btn-danger btn-sm">Zerar Notas</button></form>
+  </div>
+</div></main>
+</body></html>

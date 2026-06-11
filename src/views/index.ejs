@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Portal de Notas</title><link rel="stylesheet" href="/css/styles.css"></head>
+<body>
+<div class="login-form">
+  <h1 style="color:#E8621A;font-size:2.5rem;margin-bottom:8px">📝 Portal de Notas</h1>
+  <p style="color:#8899aa;margin-bottom:24px">Sistema com Sessions — Aula 32</p>
+  <% if (flash) { %><div class="flash"><%= flash %></div><% } %>
+  <div class="card">
+    <h2>Entrar</h2>
+    <form method="POST" action="/entrar">
+      <input type="text" name="nome" placeholder="Seu nome..." required autofocus>
+      <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;font-size:1rem">Acessar Boletim</button>
+    </form>
+  </div>
+</div>
+</body></html>
